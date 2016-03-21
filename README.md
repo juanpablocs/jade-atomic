@@ -2,12 +2,12 @@
 jade-atomic es una extension para jade que nos permite incluir de manera dinamica componentes bajo el concepto de diseño atomico.
 
 ## install
-````
+```
 npm install --save-dev jade-atomic
 ```
 
 ##usage for jade
-```
+```html
 html
 	+molecule all/head
 	body
