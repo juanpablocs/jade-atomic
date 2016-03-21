@@ -11,8 +11,12 @@ npm install --save-dev jade-atomic
 var jade = require('jade');
 var jadeAtomic = require('jade-atomic');
 
-//join with jade
-jadeAtomic({jade:jade,path:__dirname + '/[module]/[atomic]s/jade/[file].jade'});
+//setting for jadeAtomic
+jadeAtomic({
+	jade:jade,
+	basePath:__dirname,
+	fileStructure:'/[module]/[atomic]s/jade/[file].jade'
+});
 
 //little example
 var compiled = jade.compileFile(__dirname + '/home/index.jade');
