@@ -9,6 +9,6 @@ jadeAtomic({
 });
 
 //little example
-var compiled = jade.compileFile(__dirname + '/home/index.jade');
+var compiled = jade.compileFile(__dirname + '/home/index.jade', {pretty:true});
 
 console.log("it works!", compiled());
