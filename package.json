@@ -9,6 +9,15 @@
   "scripts": {
     "test": "mocha test/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juanpablocs/jade-atomic.git"
+  },
+  "keywords": [
+    "jade-atomic",
+    "atomic design",
+    "jade atomic design"
+  ],
   "author": "juanpablocs21@gmail.com",
   "license": "ISC",
   "dependencies": {
