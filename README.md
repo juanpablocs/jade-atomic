@@ -6,13 +6,29 @@ jade-atomic es una extension para jade que nos permite incluir de manera dinamic
 npm install --save-dev jade-atomic
 ```
 
-##usage for jade
-```html
-html
-  +molecule all/head
+##example for jade
+```js
+//module: home
+// index from: ./home/index.jade
+doctype html
+html(lang="en")
+  head
+    //add molecule from: ./all/molecules/jade/head.jade
+    +molecule all/head
   body
+    //add organism from: ./home/organisms/jade/header.jader
     +organism header
-    p hello world
+    .main
+      .sideleft
+        //add organism from: ./home/organisms/jade/sideleft.jade
+        +organism sideleft
+      .content
+        // add organism from: ./home/organisms/jade/posts.jade
+        +organism posts
+        //add molecule from: ./home/molecules/jade/comments.jade
+        +molecule comments
+    //add organism from: ./all/organisms/jade/footer.jade
+    +organism all/footer
 ```
 ##usage for gulp
 ```js
@@ -20,10 +36,9 @@ var gulpJade = require('gulp-jade');
 var jadeAtomic = require('jade-atomic');
 
 gulp.task('jade-html',function(){
-  return gulp.src('./home/index.jade')
+  return gulp.src('./home/*.jade')
     .pipe(gulpJade({
       jade:jadeAtomic({
-        jade:jade,
         basePath:__dirname,
         fileStructure:'/[module]/[atomic]s/jade/[file].jade'
       }),
