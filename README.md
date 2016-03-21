@@ -15,18 +15,22 @@ html(lang="en")
   head
     //add molecule from: ./all/molecules/jade/head.jade
     +molecule all/head
+
   body
-    //add organism from: ./home/organisms/jade/header.jader
+    //add organism from: ./home/organisms/jade/header.jade
     +organism header
+
     .main
       .sideleft
         //add organism from: ./home/organisms/jade/sideleft.jade
         +organism sideleft
+    
       .content
         // add organism from: ./home/organisms/jade/posts.jade
         +organism posts
         //add molecule from: ./home/molecules/jade/comments.jade
         +molecule comments
+    
     //add organism from: ./all/organisms/jade/footer.jade
     +organism all/footer
 ```
