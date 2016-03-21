@@ -6,6 +6,15 @@ jade-atomic es una extension para jade que nos permite incluir de manera dinamic
 npm install --save-dev jade-atomic
 ```
 
+##usage for jade
+```
+html
+	+molecule all/head
+	body
+		+organism header
+		p hello world
+```
+
 ##usage
 ```js
 var jade = require('jade');
