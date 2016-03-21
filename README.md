@@ -14,6 +14,24 @@ html
 		+organism header
 		p hello world
 ```
+##usage for gulp
+```js
+var gulpJade = require('gulp-jade');
+var jadeAtomic = require('jade-atomic');
+
+gulp.task('jade-html',function(){
+  return gulp.src('./home/index.jade')
+    .pipe(gulpJade({
+    	jade:jadeAtomic({
+				jade:jade,
+				basePath:__dirname,
+				fileStructure:'/[module]/[atomic]s/jade/[file].jade'
+			}),
+      pretty:true
+    }))
+    .pipe(gulp.dest('./public/')); 
+});
+```
 
 ##usage
 ```js
