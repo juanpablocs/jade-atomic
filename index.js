@@ -25,7 +25,7 @@ module.exports = function(opt){
 	Lexer(jadeInstance.Lexer);
 	
 	// parser logic
-	Parser(jadeInstance.Parser, opt.path);
+	Parser(jadeInstance.Parser, opt.basePath, opt.fileStructure);
 	
 	// return jade
 	return opt.jade;

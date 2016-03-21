@@ -8,12 +8,13 @@
   * @param  {path} base path
   * @return {void}
   */
-var parserAtomic =  function( parserInstance, xpath){
+var parserAtomic =  function( parserInstance, basepath, filestructure){
   /**
    * [fs include]
    * @type {object}
    */
   var fs = require('fs');
+  var path = require('path');
 
   /**
    * [_superParseExpr inheritance]
@@ -32,24 +33,41 @@ var parserAtomic =  function( parserInstance, xpath){
     return a;
   };
 
+  var generateNameModule = function(context,arr){
+    if(arr.length==2)
+      return arr[0];
+    
+    var m = context.filename.match(/^(?:.*?)\/(.*?)\/(?:.*?)\.jade/);
+    if(!m.length)
+      throw new Error('not name module find');
+
+    return m[1];
+  }
+  var generateNameFile = function(arr){
+    if(arr.length==2)
+      return arr[1];
+    return arr[0];
+  }
+
   /**
    * [parseIncludeAtomic] create new method for includeAtomic
    * @return {object} ast from jade parser
    */
   parserInstance.prototype.parseincludedAtomic = function(){
-    var tok = this.expect('atomicInclude');
-    var body = this.peek();
-    var chunks = tok.val;
+    var tok     = this.expect('atomicInclude');
+    var body    = this.peek();
+    var chunks  = tok.val;
+    var xpath   = basepath + filestructure;
+    var atomic  = chunks[1];
+    var names   = chunks[2].split('/');
+    var file    = xpath
+                  .replace('[module]',generateNameModule(this,names))
+                  .replace('[atomic]',atomic)
+                  .replace('[file]', generateNameFile(names));
     
-    // var path = xpath + '/pages/' + chunks[2] + '/' + chunks[1] + 's/jade/' + chunks[3] + '.jade';
-    var path = xpath
-                .replace('[module]',chunks[2])
-                .replace('[atomic]',chunks[1])
-                .replace('[file]', chunks[3]);
-    
-    var str = fs.readFileSync(path, 'utf8');
+    var str = fs.readFileSync(file, 'utf8');
 
-    var parser = new this.constructor(str, path, this.options);
+    var parser = new this.constructor(str, file, this.options);
     parser.dependencies = this.dependencies;
 
     parser.blocks = merge({}, this.blocks);
@@ -60,7 +78,7 @@ var parserAtomic =  function( parserInstance, xpath){
     this.context(parser);
     var ast = parser.parse();
     this.context();
-    ast.filename = path;
+    ast.filename = file;
     return ast;
   };
 

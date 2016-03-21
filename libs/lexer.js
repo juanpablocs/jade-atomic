@@ -14,7 +14,7 @@ var lexerAtomic =  function(lexerInstance){
     * @return {tok} send capture regex to jade.Parser
     */
   lexerInstance.prototype.atomicInclude = function(){
-    var regexSyntaxCode = /^\+(atom|molecule|organism) ([a-z_]+)\/([a-z_]+)/;
+    var regexSyntaxCode = /^\+(atom|molecule|organism) (.+)/;
     var captures = regexSyntaxCode.exec(this.input);
 
     if ( captures !== null) {
