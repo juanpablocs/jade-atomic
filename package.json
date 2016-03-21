@@ -1,0 +1,17 @@
+{
+  "name": "jade-atomic",
+  "version": "1.0.0",
+  "description": "atomic design for jade",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "mocha test/"
+  },
+  "author": "juanpablocs21@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "jade": "^1.11.0"
+  }
+}
