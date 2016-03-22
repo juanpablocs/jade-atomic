@@ -33,6 +33,11 @@ var parserAtomic =  function( parserInstance, basepath, filestructure){
     return a;
   };
 
+  /**
+   * @param  {context} jade this
+   * @param  {array} split from name
+   * @return {string} name module
+   */
   var generateNameModule = function(context,arr){
     if(arr.length==2)
       return arr[0];
@@ -43,6 +48,11 @@ var parserAtomic =  function( parserInstance, basepath, filestructure){
 
     return m[1];
   }
+
+  /**
+   * @param  {array} split from name
+   * @return {[string]} name file
+   */
   var generateNameFile = function(arr){
     if(arr.length==2)
       return arr[1];
@@ -55,7 +65,6 @@ var parserAtomic =  function( parserInstance, basepath, filestructure){
    */
   parserInstance.prototype.parseincludedAtomic = function(){
     var tok     = this.expect('atomicInclude');
-    var body    = this.peek();
     var chunks  = tok.val;
     var xpath   = basepath + filestructure;
     var atomic  = chunks[1];
@@ -79,6 +88,11 @@ var parserAtomic =  function( parserInstance, basepath, filestructure){
     var ast = parser.parse();
     this.context();
     ast.filename = file;
+
+    if ('indent' == this.peek().type) {
+      ast.includeBlock().push(this.block());
+    }
+
     return ast;
   };
 
